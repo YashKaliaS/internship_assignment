@@ -103,21 +103,21 @@ export default function Home() {
   };
 
   return (
-    <div className="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg">
-      <h1 className="text-2xl font-bold mb-4">Todo List</h1>
-      <div className="flex gap-2 mb-4">
+    <div className="max-w-lg mx-auto p-4 md:p-6 bg-white shadow-md rounded-lg">
+      <h1 className="text-xl md:text-2xl font-bold mb-4">Todo List</h1>
+      <div className="flex flex-col md:flex-row gap-2 mb-4">
         <input
           type="text"
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder={editId ? 'Update todo' : 'Enter a new todo'}
           aria-label={editId ? 'Update Todo' : 'New Todo'}
-          className="flex-1 p-2 border border-gray-300 rounded-md"
+          className="flex-1 p-2 border border-gray-300 rounded-md text-sm md:text-base"
         />
         <button
           onClick={editId ? updateTodo : addTodo}
           disabled={loading}
-          className={`px-4 py-2 rounded-md text-white ${
+          className={`mt-2 md:mt-0 px-4 py-2 rounded-md text-white ${
             editId ? 'bg-green-500 hover:bg-green-600' : 'bg-blue-500 hover:bg-blue-600'
           } ${loading ? 'bg-gray-400 cursor-not-allowed' : ''}`}
         >
@@ -128,19 +128,22 @@ export default function Home() {
       {loading && <p className="text-gray-500 mb-4 text-center">Loading...</p>}
       <ul className="list-none p-0">
         {todos.map((todo) => (
-          <li key={todo._id} className="flex justify-between items-center p-2 border-b border-gray-200">
-            <span>{todo.text}</span>
-            <div>
+          <li
+            key={todo._id}
+            className="flex flex-col md:flex-row justify-between items-center p-2 border-b border-gray-200"
+          >
+            <span className="mb-2 md:mb-0">{todo.text}</span>
+            <div className="flex gap-2">
               <button
                 onClick={() => startEditing(todo)}
-                className="px-2 py-1 bg-yellow-500 text-white rounded-md hover:bg-yellow-600"
+                className="px-2 py-1 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 text-sm md:text-base"
               >
                 Edit
               </button>
               <button
                 onClick={() => deleteTodo(todo._id)}
                 disabled={loading}
-                className={`ml-2 px-2 py-1 rounded-md text-white ${
+                className={`px-2 py-1 rounded-md text-white text-sm md:text-base ${
                   loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-red-500 hover:bg-red-600'
                 }`}
               >
